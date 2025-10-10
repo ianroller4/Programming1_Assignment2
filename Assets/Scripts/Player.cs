@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     // --- Input Variables ---
     private float xInput;
     private float yInput;
+    private Vector2 playerInput;
 
     // --- Force Variables ---
     public float linearForce = 0.5f;
@@ -35,32 +36,30 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        ProcessInput();
+        Move();
     }
 
     public void ListenForInput()
     {
-        yInput = Input.GetAxis("Vertical");
-        xInput = Input.GetAxis("Horizontal");
+        playerInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     }
 
-    public void ProcessInput()
+    public void Move()
     {
-        Vector2 yVector = new Vector2(0, yInput);
-
-        rb.AddRelativeForce(linearForce * yVector);
-
-        if (yInput >= 0)
+        if (playerInput.y > 0)
         {
+            Vector2 yVector = new Vector2(0, playerInput.y);
+            rb.AddRelativeForce(linearForce * yVector);
+
             rb.angularDrag = baseRadialBrakeDrag;
             rb.drag = baseBrakeDrag;
         }
         else
         {
-            rb.angularDrag = activeRadialBrakeDrag;
-            rb.drag = activeBrakeDrag;
+            rb.angularDrag = Mathf.Lerp(baseRadialBrakeDrag, activeRadialBrakeDrag, Mathf.Abs(playerInput.y));
+            rb.drag = Mathf.Lerp(baseBrakeDrag, activeBrakeDrag, Mathf.Abs(playerInput.y));
         }
 
-            rb.AddTorque(rotationForce * xInput * -1f);
+        rb.AddTorque(rotationForce * playerInput.x * -1f);
     }
 }
