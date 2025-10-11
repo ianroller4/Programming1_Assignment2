@@ -7,9 +7,7 @@ public class Player : MonoBehaviour
     // --- Component References ---
     private Rigidbody2D rb;
 
-    // --- Input Variables ---
-    private float xInput;
-    private float yInput;
+    // --- Input ---
     private Vector2 playerInput;
 
     // --- Force Variables ---

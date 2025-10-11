@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 1022268115125304606}
   - component: {fileID: 4263367268242001459}
   - component: {fileID: 3199022306450376324}
-  m_Layer: 0
+  - component: {fileID: 5306473337028934872}
+  - component: {fileID: -4038732195059539833}
+  m_Layer: 10
   m_Name: Asteroid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,6 +98,30 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.4
+--- !u!114 &5306473337028934872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104246395468860353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6a7568c7f5dbc449ebbcaf3633c607, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-4038732195059539833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104246395468860353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac9f4e59547fa1d4a82df5201836f9a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3656595548169822756
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,7 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7212376244715568530}
   - component: {fileID: 6895025061667394168}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Art
   m_TagString: Untagged
   m_Icon: {fileID: 0}

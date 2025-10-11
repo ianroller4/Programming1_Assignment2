@@ -8,21 +8,37 @@ public class Spawner : MonoBehaviour
     public GameObject asteroidPreFab;
 
     // --- Impulse Variables ---
-    public float lowSpawnImpulse = 500f;
-    public float highSpawnImpulse = 1000f;
+    public int lowSpawnImpulse = 250;
+    public int highSpawnImpulse = 500;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // --- Spawn Location Variables ---
+    public float spawnDistance = 20f;
+
+    // --- Switches ---
+    public bool DEBUG_MODE = false;
+
+    // --- Spawn Rate Variables ---
+    public float spawnTimeMax = 5f;
+    private float spawnTimer = 0f;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("space"))
+        if (!DEBUG_MODE)
         {
-            Spawn();
+            spawnTimer += Time.deltaTime;
+            if (spawnTimer >= spawnTimeMax)
+            {
+                Spawn();
+                spawnTimer -= spawnTimeMax;
+            }
+        }
+        else
+        {
+            //if (Input.GetKeyDown("space"))
+            //{
+            //    Spawn();
+            //}
         }
     }
 
@@ -38,13 +54,18 @@ public class Spawner : MonoBehaviour
             if (rb != null)
             {
                 // Set position randomly around the arena
-                float xPosition = Random.Range(-7f, 7f);
-                float yPosition = Random.Range(-4f, 4f);
-                asteroid.transform.position = new Vector3(0f, 3f, 0f);
-                // Set tracjectory 
-                Vector2 trajectory = new Vector2(-1, 0);
+                Vector2 spawnDirection = Random.insideUnitCircle;
+                Vector2 spawnPosition = spawnDirection * spawnDistance;
+                asteroid.transform.position = spawnPosition;
+                // Set trajectory 
+                Vector2 trajectory = -spawnDirection;
                 // Add impulse
-                rb.AddForce(trajectory * 100, ForceMode2D.Impulse);
+                int impulse = Random.Range(lowSpawnImpulse, highSpawnImpulse);
+                if (DEBUG_MODE)
+                {
+                    Debug.Log(impulse);
+                }
+                rb.AddForce(trajectory * impulse, ForceMode2D.Impulse);
             }
             else
             {
