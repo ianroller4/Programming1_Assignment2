@@ -14,7 +14,7 @@ public class BasicLaser : MonoBehaviour
     // --- Raycast Variables ---
     public float distanceToFire = 4f;
     public LayerMask layerMask;
-    RaycastHit2D laser;
+    private RaycastHit2D laser;
 
     // --- State Enum ---
     private enum States {
@@ -22,13 +22,16 @@ public class BasicLaser : MonoBehaviour
         ACTIVE,  // Is firing, cannot fire again
         COOLDOWN // Is not firing, cannot fire yet
     };
-
     States currentState;
+
+    // --- Line Renderer ---
+    LineRenderer lineRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
         currentState = States.READY;
+        lineRenderer = GetComponent<LineRenderer>();
     }
 
     // Update is called once per frame
@@ -48,8 +51,6 @@ public class BasicLaser : MonoBehaviour
             fireTimer += Time.deltaTime;
             if (fireTimer >= FIRE_TIME)
             {
-                // Stop Laser
-                // Stop art
                 fireTimer = 0;
                 currentState = States.COOLDOWN;
             }
@@ -68,12 +69,13 @@ public class BasicLaser : MonoBehaviour
                 currentState = States.READY;
             }
         }
-
     }
 
     private void Fire()
     {
         laser = Physics2D.Raycast(transform.position, transform.up, distanceToFire, layerMask);
-        Debug.DrawRay(transform.position, transform.up, Color.red);
+
+        Debug.DrawRay(transform.position, transform.up * distanceToFire, Color.red);
+       
     }
 }

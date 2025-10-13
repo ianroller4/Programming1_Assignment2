@@ -6,7 +6,7 @@ public class Health : MonoBehaviour
 {
     // --- Health Variables ---
     private float currentHP;
-    private float MAX_HP = 3f;
+    public float MAX_HP = 3f;
 
     // --- Switches ---
     public bool DEBUG_MODE = false;

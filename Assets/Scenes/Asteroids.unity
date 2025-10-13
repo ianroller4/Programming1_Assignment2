@@ -222,6 +222,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8689679077897259130, guid: 6f88e4d3167b2d3458b2fe0edad21c55, type: 3}
+      propertyPath: distanceToFire
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: -8689679077897259130, guid: 6f88e4d3167b2d3458b2fe0edad21c55, type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 3328
+      objectReference: {fileID: 0}
     - target: {fileID: 1729025369180518626, guid: 6f88e4d3167b2d3458b2fe0edad21c55, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -261,6 +269,10 @@ PrefabInstance:
     - target: {fileID: 1729025369180518626, guid: 6f88e4d3167b2d3458b2fe0edad21c55, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7456794685768293492, guid: 6f88e4d3167b2d3458b2fe0edad21c55, type: 3}
+      propertyPath: DEBUG_MODE
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8955561786618969595, guid: 6f88e4d3167b2d3458b2fe0edad21c55, type: 3}
       propertyPath: m_Name
