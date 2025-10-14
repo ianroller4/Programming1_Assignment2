@@ -27,7 +27,7 @@ public class Health : MonoBehaviour
             Debug.Log("Current HP: " + currentHP);
         }
 
-        if (currentHP < 0)
+        if (currentHP <= 0)
         {
             result = true;
             DeathFromDamage();

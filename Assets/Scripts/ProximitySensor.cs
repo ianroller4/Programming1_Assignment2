@@ -11,7 +11,7 @@ public class ProximitySensor : MonoBehaviour
     public float ALERT_TIME_MAX = 1f;
 
     // --- List of Dangers ---
-    List<GameObject> dangers;
+    private List<GameObject> dangers;
 
     // --- Switches ---
     public bool DEBUG_MODE = false;

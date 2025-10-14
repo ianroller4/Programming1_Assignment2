@@ -6,7 +6,7 @@ using UnityEngine;
 public class BasicLaser : MonoBehaviour
 {
     // --- Timer Variables ---
-    public float FIRE_TIME = 1f;
+    public float FIRE_TIME = 0.25f;
     private float fireTimer = 0;
     public float COOLDOWN_TIME = 1f;
     private float cooldownTimer = 0;
@@ -14,7 +14,9 @@ public class BasicLaser : MonoBehaviour
     // --- Raycast Variables ---
     public float distanceToFire = 4f;
     public LayerMask layerMask;
-    private RaycastHit2D laser;
+    private RaycastHit2D hit;
+
+    private int objectsHit = 0;
 
     // --- State Enum ---
     private enum States {
@@ -25,13 +27,18 @@ public class BasicLaser : MonoBehaviour
     States currentState;
 
     // --- Line Renderer ---
-    LineRenderer lineRenderer;
+    private LineRenderer lineRenderer;
+    private Vector3 startPosition = new Vector3(0, 0.5f, -1);
+
+    // --- Switches ---
+    public bool DEBUG_MODE = false;
 
     // Start is called before the first frame update
     void Start()
     {
         currentState = States.READY;
         lineRenderer = GetComponent<LineRenderer>();
+        SetUpLineRenderer();
     }
 
     // Update is called once per frame
@@ -52,12 +59,15 @@ public class BasicLaser : MonoBehaviour
             if (fireTimer >= FIRE_TIME)
             {
                 fireTimer = 0;
+                objectsHit = 0;
                 currentState = States.COOLDOWN;
+                lineRenderer.enabled = false;
             }
             else
             {
                 // Fire Laser
                 Fire();
+
             }
         }
         else if (currentState == States.COOLDOWN)
@@ -71,11 +81,50 @@ public class BasicLaser : MonoBehaviour
         }
     }
 
+    private void SetUpLineRenderer()
+    {
+        lineRenderer.startWidth = 0.1f;
+        lineRenderer.endWidth = 0.1f;
+        lineRenderer.enabled = false;
+        lineRenderer.SetPosition(0, startPosition);
+    }
+
     private void Fire()
     {
-        laser = Physics2D.Raycast(transform.position, transform.up, distanceToFire, layerMask);
+        hit = Physics2D.Raycast(transform.position, transform.up, distanceToFire, layerMask);
 
-        Debug.DrawRay(transform.position, transform.up * distanceToFire, Color.red);
+        if (hit)
+        {
+            objectsHit++;
+            if (DEBUG_MODE)
+            {
+                Debug.Log("Hit Count: " + objectsHit);
+            }
+            // Show line
+            lineRenderer.SetPosition(1, new Vector3(0, hit.distance, -1));
+            lineRenderer.enabled = true;
+
+            GameObject hitObject = hit.collider.gameObject;
+            if (hitObject.GetComponent<Health>() != null)
+            {
+                float applyDamage = 1;
+                if (objectsHit > 1)
+                {
+                    applyDamage = 1 - (objectsHit - 1) * 0.25f;
+                    if (applyDamage < 0)
+                    {
+                        applyDamage = 0;
+                    }
+                }
+                hitObject.GetComponent<Health>().TakeDamage(applyDamage);
+            }
+
+        }
+        else
+        {
+            lineRenderer.SetPosition(1, new Vector3(0, distanceToFire, -1));
+            lineRenderer.enabled = true;
+        }
        
     }
 }

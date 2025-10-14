@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     // --- Bools ---
     private bool reversing = false;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,7 +68,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            if (rb.velocity.magnitude < 0.1 && playerInput.y < 0 && reversing == false)
+            if (rb.velocity.magnitude < 0.001 && playerInput.y < 0 && reversing == false)
             {
                 rb.angularDrag = baseRadialBrakeDrag;
                 rb.drag = baseBrakeDrag;
