@@ -2,16 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/* Proximity Sensor
+ * 
+ * Detects and warns the player when enemy objects are close to the player.
+ * A trigger is used to accomplish this.
+ * 
+ */
 public class ProximitySensor : MonoBehaviour
 {
     // --- Proximity Alert Variables ---
-    private SpriteRenderer redRing;
-    private float alertTimer = 0;
-    private bool alertTimerStarted = false;
-    public float ALERT_TIME_MAX = 1f;
+    private SpriteRenderer redRing; // A red ring that surrounds the player to warn that something is too close
+    private float alertTimer = 0; // The timer for how long the red ring stays active
+    private bool alertTimerStarted = false; // Whether or not the timer has started
+    public float ALERT_TIME_MAX = 1f; // How long the timer is
 
     // --- List of Dangers ---
-    private List<GameObject> dangers;
+    private List<GameObject> dangers; // List of dangers close by. Used to draw lines to all dangers in debug mode
 
     // --- Switches ---
     public bool DEBUG_MODE = false;
