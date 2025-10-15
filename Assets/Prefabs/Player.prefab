@@ -391,6 +391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MAX_HP: 3
+  damaged: {fileID: 21300000, guid: 40829958d4e05784a87d773475228a18, type: 3}
   DEBUG_MODE: 1
 --- !u!114 &-8689679077897259130
 MonoBehaviour:
