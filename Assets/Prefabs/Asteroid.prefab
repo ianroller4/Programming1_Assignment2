@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac9f4e59547fa1d4a82df5201836f9a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosion: {fileID: 5401970635369199706, guid: a73284613a88b2944b2db915647a4a0f, type: 3}
 --- !u!114 &2811767743273368979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,7 +137,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MAX_HP: 1
+  damaged: {fileID: 0}
   DEBUG_MODE: 0
+  explosionPrefab: {fileID: 5401970635369199706, guid: a73284613a88b2944b2db915647a4a0f, type: 3}
 --- !u!1 &3656595548169822756
 GameObject:
   m_ObjectHideFlags: 0
