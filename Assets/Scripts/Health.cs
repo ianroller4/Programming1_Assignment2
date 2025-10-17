@@ -114,6 +114,33 @@ public class Health : MonoBehaviour
         return result;
     }
 
+    /* Heal
+     * 
+     * Heals a health component of a game object by the specified amount up to max hp
+     * 
+     * Parameters: float heal, the amount to heal
+     * 
+     * 
+     * Return: None
+     * 
+     */
+    public void Heal(float heal)
+    {
+        // Heal
+        currentHP += heal;
+
+        // Check if greater than max
+        if (currentHP > MAX_HP)
+        {
+            // Set to max
+            currentHP = MAX_HP;
+        }
+        if (DEBUG_MODE)
+        {
+            Debug.Log("Healed! Current HP now at: " + currentHP);
+        }
+    }
+
     /* DeathFromDamage
      * 
      * Destroys gameobject and creates effects

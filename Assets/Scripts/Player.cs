@@ -133,11 +133,23 @@ public class Player : MonoBehaviour
         }
         else
         {
+
+            // Linear interpolate between base break values and active break values
+            rb.angularDrag = Mathf.Lerp(baseRadialBrakeDrag, activeRadialBrakeDrag, Mathf.Abs(playerInput.y));
+            rb.drag = Mathf.Lerp(baseBrakeDrag, activeBrakeDrag, Mathf.Abs(playerInput.y));
+            
             // Player y is negative check if moving slow enough to transition to reversing
             if (rb.velocity.magnitude < 0.001 && playerInput.y < 0 && reversing == false)
             {
                 // Create vector with just y input
                 Vector2 yVector = new Vector2(0, playerInput.y);
+
+                // Set drag values to base values
+                rb.angularDrag = baseRadialBrakeDrag;
+                rb.drag = baseBrakeDrag;
+
+                // Player is reversing
+                reversing = true;
 
                 // Add force in direction of of y vector relative to player
                 rb.AddRelativeForce(linearForce * yVector);
@@ -147,9 +159,6 @@ public class Player : MonoBehaviour
                 {
                     audioSource.Play();
                 }
-
-                // Player is reversing
-                reversing = true;
             } 
             // Player moving slow enough so player is reversing
             else if (reversing == true)
@@ -157,6 +166,10 @@ public class Player : MonoBehaviour
                 // Create vector with just y input
                 Vector2 yVector = new Vector2(0, playerInput.y);
 
+                // Set drag values to base values
+                rb.angularDrag = baseRadialBrakeDrag;
+                rb.drag = baseBrakeDrag;
+
                 // Add force in direction of of y vector relative to player
                 rb.AddRelativeForce(linearForce * yVector);
 
@@ -165,13 +178,6 @@ public class Player : MonoBehaviour
                 {
                     audioSource.Play();
                 }
-            }
-            // Player y is negative but still moving fast enough so apply breaks
-            else
-            {
-                // Linear interpolate between base break values and active break values
-                rb.angularDrag = Mathf.Lerp(baseRadialBrakeDrag, activeRadialBrakeDrag, Mathf.Abs(playerInput.y));
-                rb.drag = Mathf.Lerp(baseBrakeDrag, activeBrakeDrag, Mathf.Abs(playerInput.y));
             }
             
         }

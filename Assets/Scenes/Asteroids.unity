@@ -339,6 +339,10 @@ PrefabInstance:
       propertyPath: DEBUG_MODE
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6344936532024741966, guid: 6f88e4d3167b2d3458b2fe0edad21c55, type: 3}
+      propertyPath: MAX_HP
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7456794685768293492, guid: 6f88e4d3167b2d3458b2fe0edad21c55, type: 3}
       propertyPath: DEBUG_MODE
       value: 0
@@ -466,11 +470,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   asteroidPreFab: {fileID: 2104246395468860353, guid: 342052032e297d84fa0b4f353e7f9cd6, type: 3}
+  extraLifePreFab: {fileID: 4652951083623920816, guid: 4b27b527116797748a408c6093304989, type: 3}
   lowSpawnImpulse: 250
   highSpawnImpulse: 500
   spawnDistance: 20
   DEBUG_MODE: 1
   spawnTimeMax: 5
+  spawnChance: 30
 --- !u!4 &2115773587
 Transform:
   m_ObjectHideFlags: 0
